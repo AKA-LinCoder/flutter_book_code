@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lsaac.flutter_book_code">
    <application
-        android:label="flutter_book_code"
+        android:label="抖音"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
