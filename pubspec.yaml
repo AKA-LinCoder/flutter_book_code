@@ -40,6 +40,8 @@ dependencies:
   provider:
   shared_preferences:
   permission_handler:
+#  flutter_fai_umeng:
+#  webview_flutter:
 
 dev_dependencies:
   flutter_test:
