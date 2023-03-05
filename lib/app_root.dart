@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'config/cupertino_delegate.dart';
 import 'config/language_config.dart';
 import 'config/observer_route.dart';
+import 'index.dart';
 
 /// FileName app_root
 ///
@@ -59,7 +60,7 @@ class _AppRootPageState extends State<AppRootPage> {
       ///应用的主题
       theme: value.currentThemeData,
       ///应用程序默认显示的页面
-      home: Container(child: Text("dsadas"),),
+      home: IndexPage(),
       debugShowCheckedModeBanner: false,
       ///国际化语言环境
       localizationsDelegates: [
