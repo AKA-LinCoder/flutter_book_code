@@ -3,6 +3,8 @@ import 'package:flutter_book_code/themes/locale_notifier.dart';
 import 'package:flutter_book_code/themes/theme_notifier.dart';
 import 'package:provider/provider.dart';
 
+import 'app_root.dart';
+
 ///程序入口
 void main() {
   //启动根目录
@@ -29,11 +31,11 @@ class _RootAppState extends State<RootApp> {
     //Providers 货源
     //Provider.of<T>(context) 消费者
     return  MultiProvider(
-      child: Container(),
-        providers: [
+      providers: [
           ChangeNotifierProvider<LocaleNotifier>.value(value: LocaleNotifier(null)),
           ChangeNotifierProvider<ThemeNotifier>.value(value: ThemeNotifier()),
-    ]);
+    ],
+      child: const AppRootPage());
   }
 }
 
