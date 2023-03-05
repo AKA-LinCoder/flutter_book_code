@@ -39,6 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider:
   shared_preferences:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:
@@ -71,7 +72,7 @@ flutter:
     #二倍图目录
     - assets/images/2.0x/
     - assets/obj/6.obj
-    - assets/voice/
+#    - assets/voice/
   #配置字体的目录结构
   fonts:
     - family: Schyler

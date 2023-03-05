@@ -60,7 +60,7 @@ class _AppRootPageState extends State<AppRootPage> {
       ///应用的主题
       theme: value.currentThemeData,
       ///应用程序默认显示的页面
-      home: IndexPage(),
+      home: const IndexPage(),
       debugShowCheckedModeBanner: false,
       ///国际化语言环境
       localizationsDelegates: [
