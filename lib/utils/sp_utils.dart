@@ -63,10 +63,10 @@ class SPUtil {
   ///保存列表数据
   static Future<bool>? putObjectList(String key, List<Object> list) {
     ///将Object的数据类型转换为String类型
-    List<String>? _dataList = list?.map((value) {
+    List<String>? dataList = list.map((value) {
       return json.encode(value);
-    })?.toList();
-    return  _sharedPreferences?.setStringList(key, _dataList??[]);
+    }).toList();
+    return  _sharedPreferences?.setStringList(key, dataList);
   }
 
   ///获取对象集合数据
@@ -75,9 +75,9 @@ class SPUtil {
     if (_sharedPreferences == null) return null;
     List<String>? dataLis = _sharedPreferences?.getStringList(key);
     return dataLis?.map((value) {
-      Map _dataMap = json.decode(value);
-      return _dataMap;
-    })?.toList();
+      Map dataMap = json.decode(value);
+      return dataMap;
+    }).toList();
   }
 
 

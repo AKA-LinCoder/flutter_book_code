@@ -7,6 +7,7 @@ import 'package:flutter_book_code/themes/theme_notifier.dart';
 import 'package:flutter_book_code/utils/log_util.dart';
 import 'package:flutter_book_code/utils/navigator_utils.dart';
 import 'package:flutter_book_code/utils/sp_utils.dart';
+import 'package:flutter_book_code/welcome.dart';
 import 'package:flutter_book_code/widgets/shake/shake_animation_text.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -178,10 +179,10 @@ class _IndexPageState extends State<IndexPage> {
   void openNext() {
     if (_userFirst == null || _userFirst == false) {
       ///第一次 隐藏logo 显示左右滑动的引导
-      NavigatorUtils.openPageByFade(context, SplashPage(), isReplace: true);
+      NavigatorUtils.openPageByFade(context, const SplashPage(), isReplace: true);
     } else {
       ///非第一次 隐藏logo 显示欢迎
-      NavigatorUtils.openPageByFade(context, SplashPage(), isReplace: true);
+      NavigatorUtils.openPageByFade(context, const WelcomePage(), isReplace: true);
     }
   }
 

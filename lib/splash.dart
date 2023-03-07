@@ -16,8 +16,12 @@ import 'common/sp_key.dart';
 ///
 /// @Description TODO 新手引导页面
 class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
+
   @override
-  _IndexPageState createState() => _IndexPageState();
+  State<StatefulWidget> createState() => _IndexPageState();
+
+
 }
 
 class _IndexPageState extends State<SplashPage> {
@@ -33,7 +37,7 @@ class _IndexPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       ///填充布局
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: buildStack(),
@@ -69,10 +73,10 @@ class _IndexPageState extends State<SplashPage> {
       ///构建条目的总个数，如这里的4
       itemCount: splList.length,
       ///每一页的显示Widget
-      itemBuilder: (BuildContext context, int postion) {
+      itemBuilder: (BuildContext context, int position) {
         ///这里直接使用的是本地资源目录下的图片
         return Image.asset(
-          splList[postion],
+          splList[position],
           fit: BoxFit.fill,
         );
       },
@@ -97,7 +101,7 @@ class _IndexPageState extends State<SplashPage> {
         width: topWidth,
         height: topHeight,
         ///动画过渡执行的时间为 200 毫秒
-        duration: Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 400),
         ///动画插值器
         curve: Curves.easeIn,
         ///用来设置边框装饰

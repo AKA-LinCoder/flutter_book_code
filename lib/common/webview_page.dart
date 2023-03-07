@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
-// import 'package:webview_flutter_android/webview_flutter_android.dart';
-// // Import for iOS features.
-// import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
-
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
+// Import for iOS features.
+import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 import '../../base/pop_base_state.dart';
 import '../utils/navigator_utils.dart';
@@ -23,17 +22,19 @@ import 'common_dialog.dart';
 ///lib/app/page/common/webview_page.dart
 showWebViewPage(
     {required BuildContext context,
-      ///标题
+
+    ///标题
     String? pageTitle,
-      ///加载H5对应的链接
+
+    ///加载H5对应的链接
     String? pageUrl,
     Function(dynamic value)? dismissCallback}) {
   ///打开用WebView页面
   NavigatorUtils.openPageByFade(
       context,
       WebViewPage(
-        pageTitle: pageTitle??'',
-        pageUrl: pageUrl??"",
+        pageTitle: pageTitle ?? '',
+        pageUrl: pageUrl ?? "",
       ),
       dismissCallBack: dismissCallback);
 }
@@ -53,105 +54,106 @@ class WebViewPage extends StatefulWidget {
 ///lib/app/page/common/webview_page.dart
 class _WebViewPageState extends State<WebViewPage> {
   ///[FaiWebViewWidget]控制器
-  // late final WebViewController _controller;
+  late final WebViewController _controller;
+
   ///浏览器是否可向前
   bool isForward = false;
+
   ///浏览器是否可向后
   bool isBack = false;
+
   ///控制栏的透明度
   double opacity = 1.0;
+
   ///控制栏的透明度是否执行完毕
   bool isOpacity = false;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    late final PlatformWebViewControllerCreationParams params;
+    if (WebViewPlatform.instance is WebKitWebViewPlatform) {
+      params = WebKitWebViewControllerCreationParams(
+        allowsInlineMediaPlayback: true,
+        mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
+      );
+    } else {
+      params = const PlatformWebViewControllerCreationParams();
+    }
 
-  // @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     late final PlatformWebViewControllerCreationParams params;
-//     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
-//       params = WebKitWebViewControllerCreationParams(
-//         allowsInlineMediaPlayback: true,
-//         mediaTypesRequiringUserAction: const <PlaybackMediaTypes>{},
-//       );
-//     } else {
-//       params = const PlatformWebViewControllerCreationParams();
-//     }
-//
-//     final WebViewController controller =
-//     WebViewController.fromPlatformCreationParams(params);
-//     // #enddocregion platform_features
-//
-//     controller
-//       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-//       ..setBackgroundColor(const Color(0x00000000))
-//       ..setNavigationDelegate(
-//         NavigationDelegate(
-//           onProgress: (int progress) {
-//             debugPrint('WebView is loading (progress : $progress%)');
-//           },
-//           onPageStarted: (String url) {
-//             debugPrint('Page started loading: $url');
-//           },
-//           onPageFinished: (String url) {
-//             debugPrint('Page finished loading: $url');
-//           },
-//           onWebResourceError: (WebResourceError error) {
-//             debugPrint('''
-// Page resource error:
-//   code: ${error.errorCode}
-//   description: ${error.description}
-//   errorType: ${error.errorType}
-//   isForMainFrame: ${error.isForMainFrame}
-//           ''');
-//           },
-//           onNavigationRequest: (NavigationRequest request) {
-//             if (request.url.startsWith('https://www.youtube.com/')) {
-//               debugPrint('blocking navigation to ${request.url}');
-//               return NavigationDecision.prevent;
-//             }
-//             debugPrint('allowing navigation to ${request.url}');
-//             return NavigationDecision.navigate;
-//           },
-//         ),
-//       )
-//       ..addJavaScriptChannel(
-//         'Toaster',
-//         onMessageReceived: (JavaScriptMessage message) {
-//           ScaffoldMessenger.of(context).showSnackBar(
-//             SnackBar(content: Text(message.message)),
-//           );
-//         },
-//       )
-//       ..loadRequest(Uri.parse('https://flutter.dev'));
-//
-//     // #docregion platform_features
-//     if (controller.platform is AndroidWebViewController) {
-//       AndroidWebViewController.enableDebugging(true);
-//       (controller.platform as AndroidWebViewController)
-//           .setMediaPlaybackRequiresUserGesture(false);
-//     }
-//     // #enddocregion platform_features
-//
-//     _controller = controller;
-//   }
+    final WebViewController controller =
+        WebViewController.fromPlatformCreationParams(params);
+    // #enddocregion platform_features
 
+    controller
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            debugPrint('WebView is loading (progress : $progress%)');
+          },
+          onPageStarted: (String url) {
+            debugPrint('Page started loading: $url');
+          },
+          onPageFinished: (String url) {
+            debugPrint('Page finished loading: $url');
+          },
+          onWebResourceError: (WebResourceError error) {
+            debugPrint('''
+Page resource error:
+  code: ${error.errorCode}
+  description: ${error.description}
+  errorType: ${error.errorType}
+  isForMainFrame: ${error.isForMainFrame}
+          ''');
+          },
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              debugPrint('blocking navigation to ${request.url}');
+              return NavigationDecision.prevent;
+            }
+            debugPrint('allowing navigation to ${request.url}');
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..addJavaScriptChannel(
+        'Toaster',
+        onMessageReceived: (JavaScriptMessage message) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message.message)),
+          );
+        },
+      )
+      ..loadRequest(Uri.parse(widget.pageUrl));
 
+    // #docregion platform_features
+    if (controller.platform is AndroidWebViewController) {
+      AndroidWebViewController.enableDebugging(true);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
+    }
+    // #enddocregion platform_features
+
+    _controller = controller;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.pageTitle}"),
+        title: Text(widget.pageTitle),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ///加载Html页面
-            // WebViewWidget(controller: _controller),
+            WebViewWidget(controller: _controller),
             ///操作栏
             buildControllerPositioned(context)
           ],
@@ -159,11 +161,13 @@ class _WebViewPageState extends State<WebViewPage> {
       ),
     );
   }
+
   ///lib/app/page/common/webview_page.dart
   ///操作栏
   buildControllerPositioned(BuildContext context) {
     return Positioned(
       bottom: 24,
+
       ///操作栏的透明度动画过渡
       child: AnimatedOpacity(
         duration: Duration(milliseconds: 400),
@@ -173,16 +177,17 @@ class _WebViewPageState extends State<WebViewPage> {
         },
         child: Container(
           alignment: Alignment.center,
+
           ///操作栏的灰色圆角背景
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.all(Radius.circular(4))
-          ),
+          decoration: const BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.all(Radius.circular(4))),
+
           ///操作栏区域的大小
           height: 40, width: 120,
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: const [
               ///左侧的后退按钮
               // buildIconLeftBackButton(context),
               SizedBox(
@@ -196,6 +201,7 @@ class _WebViewPageState extends State<WebViewPage> {
       ),
     );
   }
+
   ///lib/app/page/common/webview_page.dart
   ///左侧的后退按钮
   // buildIconRightButton() {

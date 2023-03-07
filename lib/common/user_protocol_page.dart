@@ -161,7 +161,7 @@ class _UserProtocolState extends PopBaseState<UserProtocolRequestPage> {
     showWebViewPage(
         context: context,
         pageTitle: "用户协议",
-        pageUrl: "https://blog.csdn.net/zl18603543572");
+        pageUrl: "https://juejin.cn/user/2181890103060430");
   }
 
   ///打开隐私协议
@@ -169,6 +169,6 @@ class _UserProtocolState extends PopBaseState<UserProtocolRequestPage> {
     showWebViewPage(
         context: context,
         pageTitle: "隐私协议",
-        pageUrl: "https://blog.csdn.net/zl18603543572");
+        pageUrl: "https://juejin.cn/user/2181890103060430");
   }
 }

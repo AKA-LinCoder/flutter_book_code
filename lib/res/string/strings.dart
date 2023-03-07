@@ -12,7 +12,7 @@ import 'strings_zh.dart';
 /// 可关注网易云课堂：https://study.163.com/instructor/1021406098.htm
 /// 可关注博客：https://blog.csdn.net/zl18603543572
 /// lib/app/res/string/strings.dart
-//配置自定义语言配置代理  多语言环境文字文件
+//配置自定义语言配置代理多语言环境文字文件
 //定义程序中使用到的文字 多语言适配
 class StringLanguages {
 

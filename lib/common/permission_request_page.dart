@@ -76,9 +76,9 @@ class _PermissionRequestState extends State<PermissionRequestPage>
   @override
   void initState() {
     super.initState();
-    LogUtil.e("权限请求页面");
-    print("权限请求页面");
-    WidgetsBinding.instance.addObserver(this); //添加观察者
+    //添加观察者
+    ///WidgetsBindingObserver可以监听当前应用是否在前台显示
+    WidgetsBinding.instance.addObserver(this);
     ///检查权限
     checkPermissonFunction();
   }
@@ -98,6 +98,7 @@ class _PermissionRequestState extends State<PermissionRequestPage>
   //  inactive:用户可见，但不可响应用户操作
   //  paused:已经暂停了，用户不可见、不可操作
   //  suspending：应用被挂起，此状态IOS永远不会回调
+  ///监听应用从后台回到前台视图中，应用从后台到前台的显示过程是由不可见到可见的状态 由paused变为resumed
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
@@ -106,11 +107,11 @@ class _PermissionRequestState extends State<PermissionRequestPage>
     }
   }
 
+  ///相当于是跳着到了一个透明的页面，当这个页面可以交互的时候，并且没有打开设置的时候弹出对话框请求权限
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-
       ///填充布局
       body:  Material(
           type: MaterialType.transparency,
