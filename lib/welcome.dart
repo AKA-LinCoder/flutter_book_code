@@ -8,6 +8,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_book_code/pages/home/home_main_page.dart';
 import 'package:flutter_book_code/utils/log_util.dart';
 import 'package:flutter_book_code/utils/navigator_utils.dart';
 
@@ -132,6 +133,6 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   goHome() {
-    // NavigatorUtils.openPageByFade(context, HomeMainPage(), isReplace: true);
+    NavigatorUtils.openPageByFade(context, HomeMainPage(), isReplace: true);
   }
 }
